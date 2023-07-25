@@ -10,7 +10,6 @@ import { AvatarDropdown, AvatarName } from './components/RightContent/AvatarDrop
 import { errorConfig } from './requestErrorConfig';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { getLoginUser } from './services/swagger/userController';
-import modelConfig from '@/modelconfig/modelConfig'
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 
@@ -27,7 +26,7 @@ export async function getInitialState(): Promise<{
     try {
       const res = await getLoginUser({
         headers :{
-          'Authorization': modelConfig.token.jwtToken,
+          'Authorization': localStorage.getItem("jwtToken"),
         }
       });
 

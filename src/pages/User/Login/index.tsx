@@ -2,7 +2,6 @@ import Footer from '@/components/Footer';
 import { login } from '@/services/ant-design-pro/api';
 
 import { userLogin } from '@/services/swagger/userController';
-import modelConfig from '@/modelconfig/modelConfig';
 
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
 import {
@@ -25,7 +24,6 @@ import { Alert, Input, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
 import Settings from '../../../../config/defaultSettings';
-import Cookies from 'js-cookie';
 const ActionIcons = () => {
   const langClassName = useEmotionCss(({ token }) => {
     return {
@@ -110,7 +108,7 @@ const Login: React.FC = () => {
       const res = await userLogin({ ...values });
       
       if (res.message === 'OK') {
-        modelConfig.token.jwtToken = res?.data;
+        localStorage.setItem('jwtToken', res?.data);
         const defaultLoginSuccessMessage = '登录成功！';
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
