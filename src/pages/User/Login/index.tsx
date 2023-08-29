@@ -1,5 +1,4 @@
 import Footer from '@/components/Footer';
-import { login } from '@/services/ant-design-pro/api';
 
 import { userLogin } from '@/services/swagger/userController';
 
@@ -12,15 +11,10 @@ import {
   UserOutlined,
   WeiboCircleOutlined,
 } from '@ant-design/icons';
-import {
-  LoginForm,
-  ProFormCaptcha,
-  ProFormCheckbox,
-  ProFormText,
-} from '@ant-design/pro-components';
+import { LoginForm, ProFormCaptcha, ProFormText } from '@ant-design/pro-components';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { Helmet, history, useModel } from '@umijs/max';
-import { Alert, Input, message, Tabs } from 'antd';
+import { Alert, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
 import Settings from '../../../../config/defaultSettings';
@@ -106,14 +100,14 @@ const Login: React.FC = () => {
     try {
       // 登录
       const res = await userLogin({ ...values });
-      
+
       if (res.message === 'OK') {
-        localStorage.setItem('jwtToken', res?.data);
+        localStorage.setItem('jwtToken', res?.data as string);
         const defaultLoginSuccessMessage = '登录成功！';
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
         const urlParams = new URL(window.location.href).href;
-        let newUrl = urlParams.replace("/user/login","/welcome");
+        let newUrl = urlParams.replace('/user/login', '/welcome');
         history.push(newUrl);
       }
       // 如果失败去设置用户错误信息
@@ -172,7 +166,7 @@ const Login: React.FC = () => {
           />
 
           {status === 'error' && loginType === 'email' && (
-            <LoginMessage content={'错误的用户名和密码(admin/ant.design)'} />
+            <LoginMessage content={'错误的用户名和密码'} />
           )}
           {type === 'email' && (
             <>
@@ -182,7 +176,7 @@ const Login: React.FC = () => {
                   size: 'large',
                   prefix: <UserOutlined />,
                 }}
-                placeholder={'邮 箱: admin or user'}
+                placeholder={'邮 箱: '}
                 rules={[
                   {
                     required: true,
@@ -204,7 +198,7 @@ const Login: React.FC = () => {
                   },
                 ]}
               />
-              <ProFormText name='loginIdentity' initialValue='email' hidden/>
+              <ProFormText name="loginIdentity" initialValue="email" hidden />
             </>
           )}
 
@@ -252,12 +246,13 @@ const Login: React.FC = () => {
                   },
                 ]}
                 onGetCaptcha={async (phone) => {
-                  const result = await getFakeCaptcha({
-                    phone,
-                  });
-                  if (!result) {
-                    return;
-                  }
+                  // const result = await getFakeCaptcha({
+                  //   phone,
+                  // });
+                  console.log(phone);
+                  // if (!result) {
+                  //   return;
+                  // }
                   message.success('获取验证码成功！验证码为：1234');
                 }}
               />
@@ -268,9 +263,18 @@ const Login: React.FC = () => {
               marginBottom: 24,
             }}
           >
-            {/* <ProFormCheckbox noStyle name="autoLogin">
-              自动登录
-            </ProFormCheckbox> */}
+            <a
+              style={{
+                float: 'left',
+              }}
+              onClick={()=>{
+                history.replace({
+                  pathname:'/user/register',
+                })
+              }}
+            >
+              注册账号
+            </a>
             <a
               style={{
                 float: 'right',
@@ -286,4 +290,3 @@ const Login: React.FC = () => {
   );
 };
 export default Login;
-

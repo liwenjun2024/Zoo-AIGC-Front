@@ -25,23 +25,15 @@ interface ResponseStructure {
  * @doc https://umijs.org/docs/max/request#配置
  */
 export const errorConfig: RequestConfig = {
-  // baseURL: 'http://localhost:7050',
+  baseURL: 'http://localhost:7050',
+  
   // withCredentials:true,
   // 错误处理： umi@3 的错误处理方案。
   errorConfig: {
     // 错误抛出
-    errorThrower: (res) => {
-      const { success, data, errorCode, errorMessage, showType } =
-        res as unknown as ResponseStructure;
-      if (!success) {
-        const error: any = new Error(errorMessage);
-        error.name = 'BizError';
-        error.info = { errorCode, errorMessage, showType, data };
-        throw error; // 抛出自制的错误
-      }
-    },
     // 错误接收及处理
     errorHandler: (error: any, opts: any) => {
+
       if (opts?.skipErrorHandler) throw error;
       // 我们的 errorThrower 抛出的错误。
       if (error.name === 'BizError') {
@@ -74,7 +66,7 @@ export const errorConfig: RequestConfig = {
       } else if (error.response) {
         // Axios 的错误
         // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
-        message.error(`Response status:${error.response.status}`);
+        message.error(`${error.response.data.errDescription}`);
       } else if (error.request) {
         // 请求已经成功发起，但没有收到响应
         // \`error.request\` 在浏览器中是 XMLHttpRequest 的实例，
@@ -86,7 +78,6 @@ export const errorConfig: RequestConfig = {
       }
     },
   },
- 
 
   // 请求拦截器
   requestInterceptors: [
@@ -102,9 +93,10 @@ export const errorConfig: RequestConfig = {
     (response) => {
       // 拦截响应数据，进行个性化处理
       const { data } = response as unknown as ResponseStructure;
-
-      if (data?.code !== 0) {
-        message.error(data?.message);
+      if(data?.message != '' && data?.message != null){
+        if (data?.code !== 0) {
+          message.error(data?.message);
+        }
       }
       return response;
     },

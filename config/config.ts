@@ -73,7 +73,7 @@ export default defineConfig({
    * @name layout 插件
    * @doc https://umijs.org/docs/max/layout-menu
    */
-  title: 'Ant Design Pro',
+  title: '动物园派对',
   layout: {
     locale: true,
     ...defaultSettings,
@@ -136,7 +136,7 @@ export default defineConfig({
     },
     {
       requestLibPath: "import { request } from '@umijs/max'",
-      schemaPath: 'http://localhost:7050/api/v3/api-docs/default',
+      schemaPath: 'http://localhost:7050/v3/api-docs/default',
       projectName: 'swagger',
     },
   ],

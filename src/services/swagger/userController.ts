@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { request } from '@umijs/max';
 
-/** 此处后端没有提供注释 GET /user/getLoginUser */
+/** 此处后端没有提供注释 GET /api/user/getLoginUser */
 export async function getLoginUser(options?: { [key: string]: any }) {
   return request<API.BaseResponseUserVO>('/api/user/getLoginUser', {
     method: 'GET',
@@ -10,7 +10,7 @@ export async function getLoginUser(options?: { [key: string]: any }) {
   });
 }
 
-/** 此处后端没有提供注释 POST /user/login */
+/** 此处后端没有提供注释 POST /api/user/login */
 export async function userLogin(body: API.UserLoginRequest, options?: { [key: string]: any }) {
   return request<API.BaseResponseString>('/api/user/login', {
     method: 'POST',
@@ -22,7 +22,15 @@ export async function userLogin(body: API.UserLoginRequest, options?: { [key: st
   });
 }
 
-/** 此处后端没有提供注释 POST /user/register */
+/** 此处后端没有提供注释 POST /api/user/logout */
+export async function logoutUser(options?: { [key: string]: any }) {
+  return request<API.BaseResponseBoolean>('/api/user/logout', {
+    method: 'POST',
+    ...(options || {}),
+  });
+}
+
+/** 此处后端没有提供注释 POST /api/user/register */
 export async function userRegister(
   body: API.UserRegisterRequest,
   options?: { [key: string]: any },
@@ -37,7 +45,7 @@ export async function userRegister(
   });
 }
 
-/** 此处后端没有提供注释 POST /user/sendcode */
+/** 此处后端没有提供注释 POST /api/user/sendcode */
 export async function sendCode(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.sendCodeParams,

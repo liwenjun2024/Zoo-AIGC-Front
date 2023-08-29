@@ -1,4 +1,11 @@
 declare namespace API {
+  type BaseResponseBoolean = {
+    code?: number;
+    message?: string;
+    description?: string;
+    data?: boolean;
+  };
+
   type BaseResponseInteger = {
     code?: number;
     message?: string;
@@ -6,11 +13,25 @@ declare namespace API {
     data?: number;
   };
 
+  type BaseResponseListMessageVO = {
+    code?: number;
+    message?: string;
+    description?: string;
+    data?: MessageVO[];
+  };
+
+  type BaseResponseListSessionVO = {
+    code?: number;
+    message?: string;
+    description?: string;
+    data?: SessionVO[];
+  };
+
   type BaseResponseString = {
     code?: number;
     message?: string;
     description?: string;
-    data: string;
+    data?: string;
   };
 
   type BaseResponseUserVO = {
@@ -20,8 +41,51 @@ declare namespace API {
     data?: UserVO;
   };
 
+  type chatParams = {
+    msg: string;
+  };
+
+  type ChatRequest = {
+    message?: string;
+    sid?: string;
+    question?: string;
+    mid?: number;
+  };
+
+  type MessageVO = {
+    id?: number;
+    question?: string;
+    message?: string;
+    type?: string;
+    icon?: string;
+  };
+
+  type selectMessageParams = {
+    sid: string;
+  };
+
+  type selectSessionParams = {
+    uid?: number;
+  };
+
   type sendCodeParams = {
     email: string;
+  };
+
+  type SessionRequest = {
+    user_id?: number;
+    id?: string;
+    title?: string;
+  };
+
+  type SessionVO = {
+    user_id?: number;
+    id?: string;
+    title?: string;
+  };
+
+  type SseEmitter = {
+    timeout?: number;
   };
 
   type UserLoginRequest = {
@@ -40,6 +104,7 @@ declare namespace API {
   };
 
   type UserVO = {
+    id?: number;
     email?: string;
     name?: string;
     avatar?: string;
