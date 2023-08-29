@@ -1,45 +1,33 @@
-# Zoo Design Group
+# 动物园派对 AIGC
 
-This project is initialized with [Zoo Design Group](https://pro.ant.design). Follow is the quick guide for how to use.
+施展 AI 技能，融合各大平台 AI 工具，打造全面 AIGC 服务平台。
 
-## Environment Prepare
+## 后端依赖需要
 
-Install `node_modules`:
+[Klee-cocow/Zoo-AIGC (github.com)](https://github.com/Klee-cocow/Zoo-AIGC)
 
-```bash
+## 如何运行
+
+install `node_modules`:
+
+```
 npm install
 ```
 
 or
 
-```bash
+```
 yarn
 ```
 
-## Provided Scripts
+安装完成后运行
 
-Zoo Design Group provides some useful script to help you quick start and build with web project, code style check and test.
-
-Scripts provided in `package.json`. It's safe to modify or add additional script:
-
-### Start project
-
-```bash
+```
 npm start
 ```
 
-### Build project
+or
 
-```bash
-npm run build
 ```
-
-### Check code style
-
-```bash
-npm run lint
+npm run dev
 ```
-
-## More
-
-You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/Klee-cocow/Zoo-AIGC-Front.git).
